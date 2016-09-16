@@ -64,6 +64,10 @@ func (d mposHttpClient) Do(req *http.Request) (*http.Response, error) {
 }
 
 func (d mposHttpClient) dumpRequest(r *http.Request) {
+	if r == nil {
+		log.Print("dumpReq ok: <nil>")
+		return
+	}
 	dump, err := httputil.DumpRequest(r, true)
 	if err != nil {
 		log.Print("dumpReq err:", err)
@@ -73,6 +77,10 @@ func (d mposHttpClient) dumpRequest(r *http.Request) {
 }
 
 func (d mposHttpClient) dumpResponse(r *http.Response) {
+	if r == nil {
+		log.Print("dumpResponse ok: <nil>")
+		return
+	}
 	dump, err := httputil.DumpResponse(r, true)
 	if err != nil {
 		log.Print("dumpResponse err:", err)
