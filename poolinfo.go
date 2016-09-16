@@ -6,13 +6,13 @@ type PoolInfo struct {
 	CoinTarget  string `json:"cointarget"`
 	CoinDiffChangeTarget int `json:"coindiffchangetarget"`
 	Algorithm  string `json:"algorithm"`
-	StratumPort  int `json:"stratumport,string"`
+	StratumPort  uint16 `json:"stratumport,string"`
 	PayoutSystem  string `json:"payout_system"`
-	Confirmations int `json:"confirmations"`
-	MinAPThreshold int `json:"min_ap_threshold"`
-	MaxAPThreshold int `json:"max_ap_threshold"`
+	Confirmations uint32 `json:"confirmations"`
+	MinAPThreshold float64 `json:"min_ap_threshold"`
+	MaxAPThreshold float64 `json:"max_ap_threshold"`
 	RewardType  string `json:"reward_type"`
-	Reward int `json:"reward"`
+	Reward float64 `json:"reward"`
 	TxFee float64 `json:"txfee"`
 	TxFeeManual float64 `json:"txfee_manual"`
 	TxFeeAuto float64 `json:"txfee_auto"`

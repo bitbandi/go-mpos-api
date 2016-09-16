@@ -4,9 +4,9 @@ type UserWorkers struct {
 	Id              int `json:"id"`
 	Username        string `json:"username"`
 	Password        string `json:"password"`
-	Monitor         int `json:"monitor"`
-	CountAll        int `json:"count_all"`
-	CountAllArchive int `json:"count_all_archive"`
+	Monitor         uint `json:"monitor"`
+	CountAll        uint `json:"count_all"`
+	CountAllArchive uint `json:"count_all_archive"`
 	Hashrate        int `json:"hashrate"`
 	difficulty      int `json:"difficulty"`
 }

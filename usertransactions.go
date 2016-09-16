@@ -13,9 +13,9 @@ type UserTransaction struct {
 	CoinAddress   string `json:"coin_address"`
 	Timestamp     TransactionTimestamp `json:"timestamp"`
 	TxId          string `json:"txid"`
-	Height        int `json:"height"`
+	Height        uint32 `json:"height"`
 	BlockHash     string `json:"blockhash"`
-	Confirmations int `json:"confirmations"`
+	Confirmations uint16 `json:"confirmations"`
 }
 
 type UserTransactionSummary struct {

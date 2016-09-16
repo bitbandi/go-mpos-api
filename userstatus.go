@@ -3,14 +3,14 @@ package mpos
 type UserStatus struct {
 	Username  string     `json:"username"`
 	Shares    UserShares `json:"shares"`
-	Hashrate  int        `json:"hashrate"`
-	Sharerate int        `json:"sharerate"`
+	Hashrate  float64        `json:"hashrate"`
+	Sharerate float64        `json:"sharerate"`
 }
 
 type UserShares struct {
-	Valid         int `json:"valid"`
-	Invalid       int `json:"invalid"`
-	DonatePercent int `json:"donate_percent"`
+	Valid         float64 `json:"valid"`
+	Invalid       float64 `json:"invalid"`
+	DonatePercent float64 `json:"donate_percent"`
 	IsAnonymous   int `json:"is_anonymous"`
 }
 

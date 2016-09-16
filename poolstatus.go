@@ -5,15 +5,15 @@ type PoolStatus struct {
 	Hashrate            float64 `json:"hashrate"`
 	Efficiency          float64 `json:"efficiency"`
 	Progress            float64 `json:"progress"`
-	Workers             int `json:"workers"`
-	CurrentNetworkBlock int `json:"currentnetworkblock"`
-	NextNetworkBlock    int `json:"nextnetworkblock"`
-	LastBlock           int `json:"lastblock"`
+	Workers             uint32 `json:"workers"`
+	CurrentNetworkBlock uint32 `json:"currentnetworkblock"`
+	NextNetworkBlock    uint32 `json:"nextnetworkblock"`
+	LastBlock           uint32 `json:"lastblock"`
 	NetworkDiff         float64 `json:"networkdiff"`
 	EstTime             float64 `json:"esttime"`
-	EstShares           int `json:"estshares"`
-	TimeSinceLast       int `json:"timesincelast"`
-	NetHashRate         int `json:"nethashrate"`
+	EstShares           uint32 `json:"estshares"`
+	TimeSinceLast       uint32 `json:"timesincelast"`
+	NetHashRate         uint64 `json:"nethashrate"`
 }
 
 type poolStatusResponse struct {
