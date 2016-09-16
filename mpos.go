@@ -24,13 +24,21 @@ func (d mposHttpClient) Do(req *http.Request) (*http.Response, error) {
 	if d.useragent != "" {
 		req.Header.Set("User-Agent", d.useragent)
 	}
-	resp, err := func() (*http.Response, error) {
+	client := func() (*http.Client) {
 		if d.client != nil {
-			return d.client.Do(req)
+			return d.client
 		} else {
-			return http.DefaultClient.Do(req)
+			return http.DefaultClient
 		}
 	}()
+	if client.Transport != nil {
+		if _, ok := client.Transport.(*http.Transport); ok {
+			client.Transport.(*http.Transport).TLSClientConfig.InsecureSkipVerify = true;
+		}
+	} else {
+		http.DefaultTransport.(*http.Transport).TLSClientConfig.InsecureSkipVerify = true;
+	}
+	resp, err := client.Do(req)
 	//d.dumpResponse(resp)
 	if err == nil {
 		if resp.Header.Get("Content-Type") == "text/html" {
