@@ -2,6 +2,7 @@ package mpos
 
 import (
 	"github.com/dghubble/sling"
+	"crypto/tls"
 	"net/http"
 	"net/http/httputil"
 	"log"
@@ -32,11 +33,25 @@ func (d mposHttpClient) Do(req *http.Request) (*http.Response, error) {
 		}
 	}()
 	if client.Transport != nil {
-		if _, ok := client.Transport.(*http.Transport); ok {
-			client.Transport.(*http.Transport).TLSClientConfig.InsecureSkipVerify = true;
+		if transport, ok := client.Transport.(*http.Transport); ok {
+			if transport.TLSClientConfig != nil {
+				transport.TLSClientConfig.InsecureSkipVerify = true;
+			} else {
+				transport.TLSClientConfig = &tls.Config{
+					InsecureSkipVerify: true,
+				}
+			}
 		}
 	} else {
-		http.DefaultTransport.(*http.Transport).TLSClientConfig.InsecureSkipVerify = true;
+		if transport, ok := http.DefaultTransport.(*http.Transport); ok {
+			if transport.TLSClientConfig != nil {
+				transport.TLSClientConfig.InsecureSkipVerify = true;
+			} else {
+				transport.TLSClientConfig = &tls.Config{
+					InsecureSkipVerify: true,
+				}
+			}
+		}
 	}
 	resp, err := client.Do(req)
 	//d.dumpResponse(resp)
