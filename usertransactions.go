@@ -11,7 +11,7 @@ type UserTransaction struct {
 	Type          string `json:"type"`
 	Amount        float64 `json:"amount"`
 	CoinAddress   string `json:"coin_address"`
-	Timestamp     string `json:"timestamp"`
+	Timestamp     TransactionTimestamp `json:"timestamp"`
 	TxId          string `json:"txid"`
 	Height        int `json:"height"`
 	BlockHash     string `json:"blockhash"`

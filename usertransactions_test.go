@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"testing"
 	"github.com/stretchr/testify/assert"
+	"time"
 )
 
 func TestGetUserTransactions(t *testing.T) {
@@ -97,7 +98,7 @@ func TestGetUserTransactions(t *testing.T) {
 				Type:"Bonus",
 				Amount:0.6,
 				CoinAddress:"",
-				Timestamp:"2015-05-28 19:00:12",
+				Timestamp:TransactionTimestamp(time.Date(2015, 5, 28, 19, 00, 12, 0, time.UTC)),
 				TxId:"",
 				Height:283126,
 				BlockHash:"1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014",
@@ -109,7 +110,7 @@ func TestGetUserTransactions(t *testing.T) {
 				Type:"Fee",
 				Amount:0.00045155,
 				CoinAddress:"",
-				Timestamp:"2015-05-28 19:00:12",
+				Timestamp:TransactionTimestamp(time.Date(2015, 5, 28, 19, 00, 12, 0, time.UTC)),
 				TxId:"",
 				Height:283126,
 				BlockHash:"1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014",
@@ -121,7 +122,7 @@ func TestGetUserTransactions(t *testing.T) {
 				Type:"Credit",
 				Amount:0.02257736,
 				CoinAddress:"",
-				Timestamp:"2015-05-28 19:00:12",
+				Timestamp:TransactionTimestamp(time.Date(2015, 5, 28, 19, 0, 12, 0, time.UTC)),
 				TxId:"",
 				Height:283126,
 				BlockHash:"1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014",
@@ -132,7 +133,7 @@ func TestGetUserTransactions(t *testing.T) {
 				Type:"TXFee",
 				Amount:0.1,
 				CoinAddress:"TESTADDRESS",
-				Timestamp:"2014-07-27 21:03:55",
+				Timestamp:TransactionTimestamp(time.Date(2014, 7, 27, 21, 3, 55, 0, time.UTC)),
 				TxId:"",
 				Height:0,
 				BlockHash:"",
@@ -143,7 +144,7 @@ func TestGetUserTransactions(t *testing.T) {
 				Type:"Debit_AP",
 				Amount:4575.1699014,
 				CoinAddress:"TESTADDRESS",
-				Timestamp:"2014-07-27 21:03:55",
+				Timestamp:TransactionTimestamp(time.Date(2014, 7, 27, 21, 3, 55, 0, time.UTC)),
 				TxId:"60303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752",
 				Height:0,
 				BlockHash:"",
