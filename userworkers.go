@@ -8,7 +8,7 @@ type UserWorkers struct {
 	CountAll        uint `json:"count_all"`
 	CountAllArchive uint `json:"count_all_archive"`
 	Hashrate        int `json:"hashrate"`
-	difficulty      int `json:"difficulty"`
+	Difficulty      int `json:"difficulty"`
 }
 
 type userWorkersResponse struct {

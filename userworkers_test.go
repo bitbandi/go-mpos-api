@@ -49,7 +49,7 @@ func TestGetUserWorkers(t *testing.T) {
 			CountAll:0,
 			CountAllArchive:0,
 			Hashrate:0,
-			difficulty:0},
+			Difficulty:0},
 		UserWorkers{
 			Id:139,
 			Username:"test.2",
@@ -58,7 +58,7 @@ func TestGetUserWorkers(t *testing.T) {
 			CountAll:0,
 			CountAllArchive:0,
 			Hashrate:0,
-			difficulty:0},
+			Difficulty:0},
 	}
 
 	mux.HandleFunc("/index.php", func(w http.ResponseWriter, r *http.Request) {
