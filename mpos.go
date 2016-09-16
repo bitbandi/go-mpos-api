@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"log"
+	"strings"
 )
 
 type MposClient struct {
@@ -56,7 +57,7 @@ func (d mposHttpClient) Do(req *http.Request) (*http.Response, error) {
 	resp, err := client.Do(req)
 	//d.dumpResponse(resp)
 	if err == nil {
-		if resp.Header.Get("Content-Type") == "text/html" {
+		if strings.HasPrefix(resp.Header.Get("Content-Type"), "text/html") {
 			resp.Header.Set("Content-Type", "application/json")
 		}
 	}
