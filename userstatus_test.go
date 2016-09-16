@@ -49,7 +49,7 @@ func TestGetUserStatus(t *testing.T) {
 		fmt.Fprintf(w, sampleItem)
 	})
 
-	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY")
+	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY", "")
 	userstatus, err := mposClient.GetUserStatus()
 
 	assert.Nil(t, err)

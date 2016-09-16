@@ -37,7 +37,7 @@ func TestGetUserBalance(t *testing.T) {
 		fmt.Fprintf(w, sampleItem)
 	})
 
-	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY")
+	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY", "")
 	userbalance, err := mposClient.GetUserBalance()
 
 	assert.Nil(t, err)

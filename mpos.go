@@ -14,13 +14,23 @@ type MposClient struct {
 
 // mpos send the api response with text/html content type
 // we fix this: change content type to json
-type fixedHttpClient struct {
-	client *http.Client
+type mposHttpClient struct {
+	client    *http.Client
+	useragent string
 }
 
-func (d fixedHttpClient) Do(req *http.Request) (*http.Response, error) {
+func (d mposHttpClient) Do(req *http.Request) (*http.Response, error) {
 	//d.dumpRequest(req)
-	resp, err := func() (*http.Response, error) { if d.client != nil { return d.client.Do(req) } else { return http.DefaultClient.Do(req) } }()
+	if d.useragent != "" {
+		req.Header.Set("User-Agent", d.useragent)
+	}
+	resp, err := func() (*http.Response, error) {
+		if d.client != nil {
+			return d.client.Do(req)
+		} else {
+			return http.DefaultClient.Do(req)
+		}
+	}()
 	//d.dumpResponse(resp)
 	if err == nil {
 		if resp.Header.Get("Content-Type") == "text/html" {
@@ -30,7 +40,7 @@ func (d fixedHttpClient) Do(req *http.Request) (*http.Response, error) {
 	return resp, err
 }
 
-func (d fixedHttpClient) dumpRequest(r *http.Request) {
+func (d mposHttpClient) dumpRequest(r *http.Request) {
 	dump, err := httputil.DumpRequest(r, true)
 	if err != nil {
 		log.Print("dumpReq err:", err)
@@ -39,7 +49,7 @@ func (d fixedHttpClient) dumpRequest(r *http.Request) {
 	}
 }
 
-func (d fixedHttpClient) dumpResponse(r *http.Response) {
+func (d mposHttpClient) dumpResponse(r *http.Response) {
 	dump, err := httputil.DumpResponse(r, true)
 	if err != nil {
 		log.Print("dumpResponse err:", err)
@@ -48,8 +58,8 @@ func (d fixedHttpClient) dumpResponse(r *http.Response) {
 	}
 }
 
-func NewMposClient(client *http.Client, BaseURL string, ApiToken string) *MposClient {
-	fixedclient := &fixedHttpClient{client:client}
+func NewMposClient(client *http.Client, BaseURL string, ApiToken string, UserAgent string) *MposClient {
+	fixedclient := &mposHttpClient{client:client, useragent:UserAgent}
 	return &MposClient{
 		sling: sling.New().Doer(fixedclient).Base(BaseURL),
 		apikey: ApiToken,

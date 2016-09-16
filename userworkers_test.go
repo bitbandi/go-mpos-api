@@ -70,7 +70,7 @@ func TestGetUserWorkers(t *testing.T) {
 		fmt.Fprintf(w, sampleItem)
 	})
 
-	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY")
+	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY", "")
 	userworkers, err := mposClient.GetUserWorkers()
 
 	assert.Nil(t, err)
