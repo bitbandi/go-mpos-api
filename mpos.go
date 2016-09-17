@@ -10,19 +10,23 @@ import (
 )
 
 type MposClient struct {
-	sling  *sling.Sling
-	apikey string
+	sling      *sling.Sling
+	httpClient *mposHttpClient
+	apikey     string
 }
 
 // mpos send the api response with text/html content type
 // we fix this: change content type to json
 type mposHttpClient struct {
 	client    *http.Client
+	debug     bool
 	useragent string
 }
 
 func (d mposHttpClient) Do(req *http.Request) (*http.Response, error) {
-	//d.dumpRequest(req)
+	if d.debug {
+		d.dumpRequest(req)
+	}
 	if d.useragent != "" {
 		req.Header.Set("User-Agent", d.useragent)
 	}
@@ -55,7 +59,9 @@ func (d mposHttpClient) Do(req *http.Request) (*http.Response, error) {
 		}
 	}
 	resp, err := client.Do(req)
-	//d.dumpResponse(resp)
+	if d.debug {
+		d.dumpResponse(resp)
+	}
 	if err == nil {
 		if strings.HasPrefix(resp.Header.Get("Content-Type"), "text/html") {
 			resp.Header.Set("Content-Type", "application/json")
@@ -91,11 +97,16 @@ func (d mposHttpClient) dumpResponse(r *http.Response) {
 }
 
 func NewMposClient(client *http.Client, BaseURL string, ApiToken string, UserAgent string) *MposClient {
-	fixedclient := &mposHttpClient{client:client, useragent:UserAgent}
+	httpClient := &mposHttpClient{client:client, useragent:UserAgent}
 	return &MposClient{
-		sling: sling.New().Doer(fixedclient).Base(BaseURL),
+		httpClient: httpClient,
+		sling: sling.New().Doer(httpClient).Base(BaseURL),
 		apikey: ApiToken,
 	}
+}
+
+func (client MposClient) SetDebug(debug bool) {
+	client.httpClient.debug = debug
 }
 
 type MposRequest struct {
