@@ -13,7 +13,7 @@ type PoolStatus struct {
 	EstTime             float64 `json:"esttime"`
 	EstShares           uint32 `json:"estshares"`
 	TimeSinceLast       uint32 `json:"timesincelast"`
-	NetHashRate         uint64 `json:"nethashrate"`
+	NetHashRate         float64 `json:"nethashrate"`
 }
 
 type poolStatusResponse struct {

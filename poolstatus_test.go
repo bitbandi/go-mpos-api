@@ -28,7 +28,7 @@ func TestGetPoolStatus(t *testing.T) {
 			      "esttime":176.60359422353,
 			      "estshares":699652,
 			      "timesincelast":543,
-			      "nethashrate":418239673
+			      "nethashrate":418239673.1
 			    }
 			  }
 			}`
@@ -46,7 +46,7 @@ func TestGetPoolStatus(t *testing.T) {
 		EstTime:176.60359422353,
 		EstShares:699652,
 		TimeSinceLast:543,
-		NetHashRate:418239673,
+		NetHashRate:418239673.1,
 	}
 
 	mux.HandleFunc("/index.php", func(w http.ResponseWriter, r *http.Request) {
