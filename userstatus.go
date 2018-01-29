@@ -62,7 +62,7 @@ func (s *UserStatus) UnmarshalJSON(data []byte) error {
 type UserShares struct {
 	Valid         float64 `json:"valid"`
 	Invalid       float64 `json:"invalid"`
-	DonatePercent float64 `json:"donate_percent"`
+	DonatePercent strFloat64 `json:"donate_percent"`
 	IsAnonymous   int `json:"is_anonymous"`
 }
 

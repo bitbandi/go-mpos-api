@@ -69,7 +69,7 @@ func TestGetUserStatusStr(t *testing.T) {
 			      "shares":{
 			        "valid":0,
 			        "invalid":0,
-			        "donate_percent":0,
+			        "donate_percent":"0.00000",
 			        "is_anonymous":0
 			      },
 			      "hashrate":0,
