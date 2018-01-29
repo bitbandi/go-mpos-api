@@ -26,7 +26,7 @@ func TestGetPoolStatus(t *testing.T) {
 			      "lastblock":623684,
 			      "networkdiff":10.67583674,
 			      "esttime":176.60359422353,
-			      "estshares":699652,
+			      "estshares":174293261654,
 			      "timesincelast":543,
 			      "nethashrate":418239673.1
 			    }
@@ -44,7 +44,7 @@ func TestGetPoolStatus(t *testing.T) {
 		LastBlock:623684,
 		NetworkDiff:10.67583674,
 		EstTime:176.60359422353,
-		EstShares:699652,
+		EstShares:174293261654,
 		TimeSinceLast:543,
 		NetHashRate:418239673.1,
 	}
