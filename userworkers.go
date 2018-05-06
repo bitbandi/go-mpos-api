@@ -21,7 +21,7 @@ type userWorkersResponse struct {
 
 func (client *MposClient) GetUserWorkers() ([]UserWorkers, error) {
 	userworkers := userWorkersResponse{}
-	req := &MposRequest{Page: "api", Action:"getuserworkers", Apikey:client.apikey}
+	req := &MposRequest{Page: "api", Action:"getuserworkers", Apikey:client.apikey, UserId:client.userid}
 	_, err := client.sling.New().Get("").QueryStruct(req).ReceiveSuccess(&userworkers)
 	if err != nil {
 		return userworkers.Result.Data, err

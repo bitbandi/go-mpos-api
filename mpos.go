@@ -13,6 +13,7 @@ type MposClient struct {
 	sling      *sling.Sling
 	httpClient *mposHttpClient
 	apikey     string
+	userid     uint64
 }
 
 // mpos send the api response with text/html content type
@@ -96,7 +97,7 @@ func (d mposHttpClient) dumpResponse(r *http.Response) {
 	}
 }
 
-func NewMposClient(client *http.Client, BaseURL string, ApiToken string, UserAgent string) *MposClient {
+func NewMposClient(client *http.Client, BaseURL string, ApiToken string, UserId uint64, UserAgent string) *MposClient {
 	if strings.HasSuffix(BaseURL, "/") {
 		BaseURL += "index.php"
 	}
@@ -105,6 +106,7 @@ func NewMposClient(client *http.Client, BaseURL string, ApiToken string, UserAge
 		httpClient: httpClient,
 		sling: sling.New().Doer(httpClient).Base(BaseURL),
 		apikey: ApiToken,
+		userid: UserId,
 	}
 }
 
@@ -116,4 +118,5 @@ type MposRequest struct {
 	Page   string `url:"page"`
 	Action string `url:"action"`
 	Apikey string `url:"api_key"`
+	UserId uint64 `url:"id,omitempty"`
 }

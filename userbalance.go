@@ -37,7 +37,7 @@ type userBalanceResponse struct {
 
 func (client *MposClient) GetUserBalance() (UserBalance, error) {
 	userbalance := userBalanceResponse{}
-	req := &MposRequest{Page: "api", Action:"getuserbalance", Apikey:client.apikey}
+	req := &MposRequest{Page: "api", Action:"getuserbalance", Apikey:client.apikey, UserId:client.userid}
 	_, err := client.sling.New().Get("").QueryStruct(req).ReceiveSuccess(&userbalance)
 	if err != nil {
 		return userbalance.Result.Data, err

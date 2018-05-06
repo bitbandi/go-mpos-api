@@ -76,7 +76,7 @@ type userStatusResponse struct {
 
 func (client *MposClient) GetUserStatus() (UserStatus, error) {
 	userstatus := userStatusResponse{}
-	req := &MposRequest{Page: "api", Action:"getuserstatus", Apikey:client.apikey}
+	req := &MposRequest{Page: "api", Action:"getuserstatus", Apikey:client.apikey, UserId:client.userid}
 	_, err := client.sling.New().Get("").QueryStruct(req).ReceiveSuccess(&userstatus)
 	if err != nil {
 		return userstatus.Result.Data, err
