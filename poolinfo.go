@@ -30,7 +30,7 @@ type poolInfoResponse struct {
 func (client *MposClient) GetPoolInfo() (PoolInfo, error) {
 	poolinfo := poolInfoResponse{}
 	req := &MposRequest{Page: "api", Action:"getpoolinfo", Apikey:client.apikey}
-	_, err := client.sling.New().Get("index.php").QueryStruct(req).ReceiveSuccess(&poolinfo)
+	_, err := client.sling.New().Get("").QueryStruct(req).ReceiveSuccess(&poolinfo)
 	if err != nil {
 		return poolinfo.Result.Data, err
 	}

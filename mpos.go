@@ -97,6 +97,9 @@ func (d mposHttpClient) dumpResponse(r *http.Response) {
 }
 
 func NewMposClient(client *http.Client, BaseURL string, ApiToken string, UserAgent string) *MposClient {
+	if strings.HasSuffix(BaseURL, "/") {
+		BaseURL += "index.php"
+	}
 	httpClient := &mposHttpClient{client:client, useragent:UserAgent}
 	return &MposClient{
 		httpClient: httpClient,

@@ -37,7 +37,7 @@ type userTransactionsResponse struct {
 func (client *MposClient) GetUserTransactions() (UserTransactions, error) {
 	usertransactions := userTransactionsResponse{}
 	req := &MposRequest{Page: "api", Action:"getusertransactions", Apikey:client.apikey}
-	_, err := client.sling.New().Get("index.php").QueryStruct(req).ReceiveSuccess(&usertransactions)
+	_, err := client.sling.New().Get("").QueryStruct(req).ReceiveSuccess(&usertransactions)
 	if err != nil {
 		return usertransactions.Result.Data, err
 	}
