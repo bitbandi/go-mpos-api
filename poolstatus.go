@@ -11,7 +11,7 @@ type PoolStatus struct {
 	LastBlock           uint32 `json:"lastblock"`
 	NetworkDiff         float64 `json:"networkdiff"`
 	EstTime             float64 `json:"esttime"`
-	EstShares           uint64 `json:"estshares"`
+	EstShares           float64 `json:"estshares"`
 	TimeSinceLast       uint32 `json:"timesincelast"`
 	NetHashRate         float64 `json:"nethashrate"`
 }
