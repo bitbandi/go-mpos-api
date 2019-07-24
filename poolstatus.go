@@ -1,5 +1,9 @@
 package mpos
 
+import (
+	"encoding/json"
+)
+
 type PoolStatus struct {
 	Poolname            string `json:"pool_name"`
 	Hashrate            float64 `json:"hashrate"`
@@ -14,6 +18,29 @@ type PoolStatus struct {
 	EstShares           float64 `json:"estshares"`
 	TimeSinceLast       uint32 `json:"timesincelast"`
 	NetHashRate         float64 `json:"nethashrate"`
+}
+
+func (s *PoolStatus) UnmarshalJSON(data []byte) error {
+	type Alias PoolStatus
+	aux := &struct {
+		Workers interface{} `json:"workers,string"`
+		*Alias
+	}{
+		Alias: (*Alias)(s),
+	}
+
+	if err := json.Unmarshal(data, &aux); err != nil {
+		return err
+	}
+	switch v := aux.Workers.(type) {
+	case uint32:
+		s.Workers = v
+	case bool:
+		s.Workers = 0
+	default:
+		s.Workers = 0
+	}
+	return nil
 }
 
 type poolStatusResponse struct {
