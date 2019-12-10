@@ -167,7 +167,7 @@ func TestGetUserTransactions(t *testing.T) {
 		fmt.Fprintf(w, sampleItem)
 	})
 
-	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY", "")
+	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY", 0, "")
 	usertransactions, err := mposClient.GetUserTransactions()
 
 	assert.Nil(t, err)

@@ -30,7 +30,7 @@ func TestGetPoolHashrate(t *testing.T) {
 		fmt.Fprintf(w, sampleItem)
 	})
 
-	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY", "")
+	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY", 0, "")
 	poolhashrate, err := mposClient.GetPoolHashrate()
 
 	assert.Nil(t, err)

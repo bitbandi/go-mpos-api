@@ -63,7 +63,7 @@ func TestGetPoolInfo(t *testing.T) {
 		fmt.Fprintf(w, sampleItem)
 	})
 
-	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY", "")
+	mposClient := NewMposClient(httpClient, "http://dummy.com/", "FAKEKEY", 0, "")
 	poolinfo, err := mposClient.GetPoolInfo()
 
 	assert.Nil(t, err)

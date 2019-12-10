@@ -2,6 +2,7 @@ package mpos
 
 import (
 	"encoding/json"
+	"strconv"
 )
 
 type PoolStatus struct {
@@ -33,8 +34,17 @@ func (s *PoolStatus) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v := aux.Workers.(type) {
+	case string:
+		w, err := strconv.Atoi(v)
+		if err != nil {
+			return err
+		}
+		s.Workers = uint32(w)
 	case uint32:
 		s.Workers = v
+	case float32:
+	case float64:
+		s.Workers = uint32(v)
 	case bool:
 		s.Workers = 0
 	default:
