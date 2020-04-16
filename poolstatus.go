@@ -24,7 +24,8 @@ type PoolStatus struct {
 func (s *PoolStatus) UnmarshalJSON(data []byte) error {
 	type Alias PoolStatus
 	aux := &struct {
-		Workers interface{} `json:"workers,string"`
+		Hashrate interface{} `json:"hashrate,string"`
+		Workers  interface{} `json:"workers,string"`
 		*Alias
 	}{
 		Alias: (*Alias)(s),
@@ -32,6 +33,24 @@ func (s *PoolStatus) UnmarshalJSON(data []byte) error {
 
 	if err := json.Unmarshal(data, &aux); err != nil {
 		return err
+	}
+	switch v := aux.Hashrate.(type) {
+	case string:
+		h, err := strconv.ParseFloat(v, 64)
+		if err != nil {
+			return err
+		}
+		s.Hashrate = h
+	case uint32:
+	case uint64:
+		s.Hashrate = float64(v)
+	case float32:
+	case float64:
+		s.Hashrate = v
+	case bool:
+		s.Hashrate = 0.0
+	default:
+		s.Hashrate = 0.0
 	}
 	switch v := aux.Workers.(type) {
 	case string:
